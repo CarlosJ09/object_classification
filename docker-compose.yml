@@ -1,0 +1,21 @@
+services:
+  frontend:
+    container_name: frontend
+    image: frontend-classification
+    build:
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    ports:
+      - 5173:5173
+    volumes:
+      - ./frontend:/app
+  backend:
+    container_name: backend
+    image: backend-classification
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app
