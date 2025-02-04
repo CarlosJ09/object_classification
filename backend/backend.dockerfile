@@ -2,9 +2,9 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY src/requirements.txt src/
+COPY /requirements.txt .
 
-RUN pip install --no-cache-dir --upgrade -r src/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY . .
 
