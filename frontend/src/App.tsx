@@ -1,11 +1,12 @@
 import { useState, ChangeEvent } from "react";
 import WelcomeComponent from "@/components/WelcomeComponent";
 import FileUpload from "@/components/FileUpload";
+import DetectedObjects from "./components/DetectedObjects";
 
 function App() {
   const [imageUrl, setImageUrl] = useState<string>("");
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [detectedObjects, setDetectedObjects] = useState<string[]>([]);
+  const [detectedObjects, setDetectedObjects] = useState<string>("");
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -26,7 +27,12 @@ function App() {
         },
       });
       const data = await res.json();
-      console.log(data);
+      if (data.detail) {
+        alert(data.detail);
+        return;
+      }
+
+      setDetectedObjects(data.response);
     } catch (error) {
       console.error(error);
     }
@@ -42,6 +48,8 @@ function App() {
         handleUrlChange={handleUrlChange}
         detectObjects={detectObjects}
       />
+
+      <DetectedObjects objects={detectedObjects} />
     </div>
   );
 }

@@ -32,35 +32,39 @@ function FileUpload({
         </button>
       </div>
 
-      {inputMethod === "file" && (
-        <div className="w-full">
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">
-              {selectedImage ? selectedImage.name : "Pick a file"}
-            </legend>
-            <input
-              type="file"
-              className="w-full file-input file-input-lg file-input-primary"
-              onChange={handleFileChange}
-              accept="image/*"
-            />
-            <label className="fieldset-label">
-              {selectedImage
-                ? `Size: ${(selectedImage.size * 0.001).toFixed(2)} KB`
-                : "Max size 24MB"}
-            </label>
-          </fieldset>
-        </div>
-      )}
+      <div className="w-full h-32 flex justify-center items-center ">
+        {inputMethod === "file" && (
+          <div className="w-full">
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">
+                {selectedImage ? selectedImage.name : "Pick a file"}
+              </legend>
+              <input
+                type="file"
+                className="w-full file-input file-input-lg file-input-primary"
+                onChange={handleFileChange}
+                accept="image/*"
+              />
+              <label className="fieldset-label">
+                {selectedImage
+                  ? `Size: ${(selectedImage.size * 0.001).toFixed(2)} KB`
+                  : "Max size 24MB"}
+              </label>
+            </fieldset>
+          </div>
+        )}
 
-      {inputMethod === "url" && (
-        <input
-          type="text"
-          placeholder="Enter image URL"
-          className="input input-bordered input-lg w-full"
-          onChange={handleUrlChange}
-        />
-      )}
+        {inputMethod === "url" && (
+          <div className="w-full flex justify-center items-center">
+            <input
+              type="text"
+              placeholder="Enter image URL"
+              className="w-full input input-bordered input-lg"
+              onChange={handleUrlChange}
+            />
+          </div>
+        )}
+      </div>
 
       <button className="w-full btn btn-primary mt-4" onClick={detectObjects}>
         Classify
